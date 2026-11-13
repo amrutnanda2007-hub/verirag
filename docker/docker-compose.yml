@@ -1,0 +1,22 @@
+services:
+  verirag-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: verirag-service
+    ports:
+      - "8000:8000"
+    environment:
+      - VERIRAG_ENV=production
+      - VERIRAG_LOG_LEVEL=INFO
+      - VERIRAG_CHUNK_SIZE=512
+      - VERIRAG_CHUNK_OVERLAP=64
+      - VERIRAG_ENABLE_RERANKING=true
+      - VERIRAG_ENABLE_VERIFICATION=true
+    volumes:
+      - verirag_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  verirag_data:
+    driver: local
