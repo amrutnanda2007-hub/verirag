@@ -1,0 +1,43 @@
+[
+  {
+    "id": "eval_001",
+    "query": "How does Raft leader election handle network partitions and split votes?",
+    "ground_truth": "Raft uses randomized election timers between 150ms and 300ms to avoid split votes. In network partitions, only the majority partition can elect a leader and commit new write entries.",
+    "contexts": [
+      "Raft achieves consensus by electing a distinguished leader node that accepts client requests, appends log entries to its local write-ahead log (WAL), and replicates these entries across a majority quorum of followers.",
+      "Leader Election: Raft uses randomized election timers (typically between 150ms and 300ms) to avoid split votes. When a follower node does not receive heartbeats, it transitions to candidate state.",
+      "In the event of a network partition creating an asymmetric split, only the majority partition can commit new log entries."
+    ],
+    "answer": "Raft prevents split votes using randomized election timers between 150ms and 300ms. In network partitions, only the majority partition with quorum can elect leaders and commit log entries."
+  },
+  {
+    "id": "eval_002",
+    "query": "What are the core NIST tenets of Zero Trust Architecture?",
+    "ground_truth": "The core NIST SP 800-207 tenets are Never Trust, Always Verify, Least Privilege Access with JIT/JEA, and Assume Breach preventing lateral movement.",
+    "contexts": [
+      "Never Trust, Always Verify: Every access request is fully authenticated, authorized, and encrypted before granting session connectivity.",
+      "Least Privilege Access: Users and automated service accounts receive access rights restricted strictly to explicit resources necessary for their operational role.",
+      "Assume Breach: Security telemetry treats every network segment as hostile. Lateral movement is strictly prevented via micro-segmentation and mutual TLS."
+    ],
+    "answer": "The core NIST tenets of Zero Trust Architecture are Never Trust Always Verify, Least Privilege Access with just-in-time access, and Assume Breach using micro-segmentation and mTLS."
+  },
+  {
+    "id": "eval_003",
+    "query": "What is the formula and purpose of Reciprocal Rank Fusion in hybrid retrieval?",
+    "ground_truth": "Reciprocal Rank Fusion inverts rank positions across sparse BM25 and dense embeddings using the formula RRF(d) = sum(1 / (k + r_m(d))) with smoothing parameter k=60 to prevent outliers from dominating.",
+    "contexts": [
+      "RRF calculates a monotonic combined score by inverting rank positions across sparse lexical algorithms (BM25) and dense embeddings: RRF(d) = sum(1 / (k + r_m(d))) where k is a constant smoothing parameter (typically k=60) designed to prevent extreme outliers from disproportionately dominating results."
+    ],
+    "answer": "Reciprocal Rank Fusion (RRF) combines sparse lexical BM25 and dense embedding ranks using the formula RRF(d) = sum(1 / (k + r_m(d))) with smoothing constant k=60 to stop outliers from skewing results."
+  },
+  {
+    "id": "eval_004",
+    "query": "How does envelope encryption protect data at rest using KMS?",
+    "ground_truth": "Envelope encryption uses a Master Key in the HSM to encrypt a dynamic Data Encryption Key (DEK), which encrypts the data using AES-256-GCM. The plaintext DEK is wiped from memory and only ciphertext DEK is stored.",
+    "contexts": [
+      "Master Key (Customer Managed Key): Never leaves the Hardware Security Module (HSM). Data Encryption Key (DEK): Generated dynamically by KMS to encrypt file blocks using AES-256-GCM.",
+      "The plaintext DEK is used to encrypt the payload and immediately wiped from volatile memory; only the ciphertext DEK is persisted alongside the encrypted data object."
+    ],
+    "answer": "Envelope encryption uses a master key in an HSM to encrypt a dynamic data encryption key (DEK). The data is encrypted with AES-256-GCM, the plaintext DEK is erased from memory, and only the encrypted DEK is stored."
+  }
+]
